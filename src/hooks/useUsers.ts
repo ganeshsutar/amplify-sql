@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { userService, User, UpdateUserInput, CreateUserInput, UserFilters } from '../services/users';
+import { userService, UpdateUserInput, CreateUserInput, UserFilters } from '../services/users';
 
 /**
  * React Query hooks for User operations

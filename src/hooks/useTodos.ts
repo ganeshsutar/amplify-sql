@@ -94,7 +94,7 @@ export function useUpdateTodo() {
 
       return { previousTodos };
     },
-    onError: (err, variables, context) => {
+    onError: (_err, _variables, context) => {
       // Rollback on error
       if (context?.previousTodos) {
         queryClient.setQueriesData(
@@ -139,7 +139,7 @@ export function useDeleteTodo() {
 
       return { previousTodos };
     },
-    onError: (err, id, context) => {
+    onError: (_err, _id, context) => {
       // Rollback on error
       if (context?.previousTodos) {
         queryClient.setQueriesData(

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { productService, Product, CreateProductInput, UpdateProductInput, ProductFilters } from '../services/products';
+import { productService, CreateProductInput, UpdateProductInput, ProductFilters } from '../services/products';
 
 /**
  * React Query hooks for Product operations
