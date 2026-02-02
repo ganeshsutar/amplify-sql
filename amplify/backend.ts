@@ -7,6 +7,7 @@ import { VpcStack } from './custom/vpc-stack';
 import { DatabaseStack } from './custom/database-stack';
 import { LambdaStack } from './custom/lambda-stack';
 import { ApiGatewayStack } from './custom/api-gateway-stack';
+import { MigrationStack } from './custom/migration-stack';
 
 /**
  * Define the Amplify backend with custom infrastructure
@@ -76,6 +77,18 @@ const apiGatewayStack = new ApiGatewayStack(customStack, 'ApiGatewayStack', {
 });
 
 // ============================================================================
+// Migration Stack
+// ============================================================================
+const migrationStack = new MigrationStack(customStack, 'MigrationStack', {
+  vpc: vpcStack.vpc,
+  securityGroup: vpcStack.lambdaSecurityGroup,
+  databaseSecret: databaseStack.secret,
+  proxyEndpoint: databaseStack.proxyEndpoint,
+  databaseName: 'appdb',
+  runOnDeploy: false, // Set to true to auto-run migrations on each deploy
+});
+
+// ============================================================================
 // Outputs
 // ============================================================================
 
@@ -84,6 +97,7 @@ backend.addOutput({
   custom: {
     apiEndpoint: apiGatewayStack.apiEndpoint,
     apiRegion: cdk.Stack.of(customStack).region,
+    migrationFunctionName: migrationStack.migrationFunction.functionName,
   },
 });
 

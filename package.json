@@ -7,7 +7,12 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "db:migrate:status": "aws lambda invoke --function-name amplify-sql-migrate --payload '{\"action\": \"status\"}' --cli-binary-format raw-in-base64-out /dev/stdout",
+    "db:migrate:deploy": "aws lambda invoke --function-name amplify-sql-migrate --payload '{\"action\": \"deploy\"}' --cli-binary-format raw-in-base64-out /dev/stdout",
+    "db:migrate:dev": "cd amplify/functions/api && npx prisma migrate dev",
+    "db:studio": "cd amplify/functions/api && npx prisma studio",
+    "db:generate": "cd amplify/functions/api && npx prisma generate"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "~6.13.2",
